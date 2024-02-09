@@ -149,6 +149,7 @@ def main():
     parser.add_argument("-l", action="store_true")
     parser.add_argument("-u", action="store_true")
     parser.add_argument("-T", action="store_true")
+    parser.add_argument("-m", action="store_true")
     args = parser.parse_args()
 
     if args.r:
@@ -184,9 +185,14 @@ def main():
     LINK = args.l
     UNMOUNT = args.u
     
+    extension=""
+    if args.m:
+        extension=".mp3"
+    else:
+        extension=".flac"
     i = 0
     for file in os.listdir("."):
-        if file.endswith(".flac"):
+        if file.endswith(extension):
                 metadata = (
                     ffmpeg
                     .probe(file)
